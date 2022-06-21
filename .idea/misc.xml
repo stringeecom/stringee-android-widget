@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/app/src/main/res/layout/activity_main.xml" value="0.35052083333333334" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/bg_green_circle.xml" value="0.36666666666666664" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/bg_green_circle_pressed.xml" value="0.36666666666666664" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/bg_green_circle_selector.xml" value="0.36666666666666664" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/bg_trans_15_circle.xml" value="0.36666666666666664" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/btn_end_call.xml" value="0.36666666666666664" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/btn_end_call_pressed.xml" value="0.36666666666666664" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/btn_end_call_selector.xml" value="0.36666666666666664" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/btn_ic_selected_selector.xml" value="0.36666666666666664" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/control_bg.xml" value="0.3416666666666667" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/stringee_bg_green_circle.xml" value="0.1796875" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/stringee_bg_green_circle_pressed.xml" value="0.1796875" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/stringee_bg_green_circle_selector.xml" value="0.1796875" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/stringee_bg_trans_15_circle.xml" value="0.3416666666666667" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/stringee_bg_trans_30_circle.xml" value="0.3416666666666667" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/stringee_bg_white_circle.xml" value="0.1796875" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/stringee_btn_end_call.xml" value="0.36666666666666664" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/stringee_btn_end_call_pressed.xml" value="0.36666666666666664" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/stringee_btn_end_call_selector.xml" value="0.3416666666666667" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/stringee_btn_ic_selected_selector.xml" value="0.3416666666666667" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/stringee_btn_ic_selector.xml" value="0.1796875" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/drawable/vietin_end_call_selector.xml" value="0.3416666666666667" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/layout/stringee_activity_video_call.xml" value="0.16666666666666666" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/layout/stringee_activity_voice_call.xml" value="0.35052083333333334" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeSample/stringeesdk/src/main/res/layout/stringee_incoming_call_big_notification.xml" value="0.16354166666666667" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeWidget/app/src/main/res/layout/activity_main.xml" value="0.35052083333333334" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeWidget/stringee-android-widget/src/main/res/layout/stringee_activity_video_call.xml" value="0.35052083333333334" />
+        <entry key="..\:/My Work/Android Studio Workspace/StringeeWidget/stringee-android-widget/src/main/res/layout/stringee_activity_voice_call.xml" value="0.35052083333333334" />
+        <entry key="..\:/My Work/Android Studio Workspace/ViettelSDK/app/src/main/res/layout/activity_main.xml" value="0.2957427536231884" />
+        <entry key="..\:/My Work/Android Studio Workspace/ViettelSDK/viettelsdk/src/main/res/drawable/bg_green_circle.xml" value="0.287962962962963" />
+        <entry key="..\:/My Work/Android Studio Workspace/ViettelSDK/viettelsdk/src/main/res/drawable/bg_green_circle_pressed.xml" value="0.287962962962963" />
+        <entry key="..\:/My Work/Android Studio Workspace/ViettelSDK/viettelsdk/src/main/res/drawable/bg_green_circle_selector.xml" value="0.287962962962963" />
+        <entry key="..\:/My Work/Android Studio Workspace/ViettelSDK/viettelsdk/src/main/res/drawable/bg_trans_15_circle.xml" value="0.287962962962963" />
+        <entry key="..\:/My Work/Android Studio Workspace/ViettelSDK/viettelsdk/src/main/res/drawable/bg_trans_30_circle.xml" value="0.287962962962963" />
+        <entry key="..\:/My Work/Android Studio Workspace/ViettelSDK/viettelsdk/src/main/res/drawable/bg_white_circle.xml" value="0.287962962962963" />
+        <entry key="..\:/My Work/Android Studio Workspace/ViettelSDK/viettelsdk/src/main/res/drawable/btn_end_call.xml" value="0.287962962962963" />
+        <entry key="..\:/My Work/Android Studio Workspace/ViettelSDK/viettelsdk/src/main/res/drawable/btn_end_call_pressed.xml" value="0.287962962962963" />
+        <entry key="..\:/My Work/Android Studio Workspace/ViettelSDK/viettelsdk/src/main/res/drawable/btn_end_call_selector.xml" value="0.287962962962963" />
+        <entry key="..\:/My Work/Android Studio Workspace/ViettelSDK/viettelsdk/src/main/res/drawable/btn_ic_selected_selector.xml" value="0.287962962962963" />
+        <entry key="..\:/My Work/Android Studio Workspace/ViettelSDK/viettelsdk/src/main/res/drawable/btn_ic_selector.xml" value="0.287962962962963" />
+        <entry key="..\:/My Work/Android Studio Workspace/ViettelSDK/viettelsdk/src/main/res/layout/activity_video_call.xml" value="0.2957427536231884" />
+        <entry key="..\:/My Work/Android Studio Workspace/ViettelSDK/viettelsdk/src/main/res/layout/stringee_activity_video_call.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

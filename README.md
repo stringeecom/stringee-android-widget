@@ -1,0 +1,1 @@
+# stringee-android-widget
