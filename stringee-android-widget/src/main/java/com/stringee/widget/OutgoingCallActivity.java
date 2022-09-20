@@ -179,8 +179,6 @@ public class OutgoingCallActivity extends Activity implements View.OnClickListen
         } else {
             btnSpeaker = findViewById(R.id.btn_speaker);
             btnSpeaker.setOnClickListener(this);
-            ImageButton btnDial = findViewById(R.id.btn_dialpad);
-            btnDial.setOnClickListener(this);
         }
 
         String name = callConfig.getTo();
@@ -467,7 +465,7 @@ public class OutgoingCallActivity extends Activity implements View.OnClickListen
         if (customData != null && customData.length() > 0) {
             outgoingCall2.setCustom(customData);
         }
-        outgoingCall2.makeCall();
+        outgoingCall2.makeCall(null);
     }
 
     private void startCall() {
@@ -523,7 +521,7 @@ public class OutgoingCallActivity extends Activity implements View.OnClickListen
                             }
                             tvStatus.setText(R.string.stringee_call_starting);
                             if (mMediaState == StringeeCall.MediaState.CONNECTED) {
-                                callStarted2();
+                                callStarted();
                             }
                             break;
                         case BUSY:
@@ -584,7 +582,7 @@ public class OutgoingCallActivity extends Activity implements View.OnClickListen
                     mMediaState = mediaState;
                     if (mediaState == StringeeCall.MediaState.CONNECTED) {
                         if (mSignalingState == StringeeCall.SignalingState.ANSWERED) {
-                            callStarted2();
+                            callStarted();
                         }
                     }
                 });
@@ -607,7 +605,12 @@ public class OutgoingCallActivity extends Activity implements View.OnClickListen
         if (customData != null && customData.length() > 0) {
             outgoingCall.setCustom(customData);
         }
-        outgoingCall.makeCall();
+        outgoingCall.makeCall(new StatusListener() {
+            @Override
+            public void onSuccess() {
+                Log.d("Stringee", "Make call successfully");
+            }
+        });
     }
 
     private void endCall(boolean isHangup) {
@@ -634,12 +637,12 @@ public class OutgoingCallActivity extends Activity implements View.OnClickListen
         }
 
         if (outgoingCall != null && isHangup) {
-            outgoingCall.hangup();
+            outgoingCall.hangup(null);
         }
         outgoingCall = null;
 
         if (outgoingCall2 != null && isHangup) {
-            outgoingCall2.hangup();
+            outgoingCall2.hangup(null);
         }
         outgoingCall2 = null;
 

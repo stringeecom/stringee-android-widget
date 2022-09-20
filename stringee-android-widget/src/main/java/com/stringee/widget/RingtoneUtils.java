@@ -36,17 +36,19 @@ public class RingtoneUtils {
     }
 
     public void playWaitingSound() {
-        ringingPlayer = new MediaPlayer();
-        ringingPlayer.setOnPreparedListener(mediaPlayer -> ringingPlayer.start());
-        ringingPlayer.setLooping(true);
-        ringingPlayer.setAudioStreamType(AudioManager.STREAM_VOICE_CALL);
-        try {
-            ringingPlayer.setDataSource(mContext, waitingPlayerUri);
-            ringingPlayer.prepareAsync();
-        } catch (Exception e) {
-            if (ringingPlayer != null) {
-                ringingPlayer.release();
-                ringingPlayer = null;
+        if (ringingPlayer == null) {
+            ringingPlayer = new MediaPlayer();
+            ringingPlayer.setOnPreparedListener(mediaPlayer -> ringingPlayer.start());
+            ringingPlayer.setLooping(true);
+            ringingPlayer.setAudioStreamType(AudioManager.STREAM_VOICE_CALL);
+            try {
+                ringingPlayer.setDataSource(mContext, waitingPlayerUri);
+                ringingPlayer.prepareAsync();
+            } catch (Exception e) {
+                if (ringingPlayer != null) {
+                    ringingPlayer.release();
+                    ringingPlayer = null;
+                }
             }
         }
     }
@@ -59,26 +61,28 @@ public class RingtoneUtils {
     }
 
     public void playEndCallSound() {
-        endCallPlayer = new MediaPlayer();
-        endCallPlayer.setOnPreparedListener(mediaPlayer -> endCallPlayer.start());
-        endCallPlayer.setLooping(false);
-        endCallPlayer.setAudioStreamType(AudioManager.STREAM_VOICE_CALL);
-        try {
-            endCallPlayer.setDataSource(mContext, endCallPlayerUri);
-            endCallPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mediaPlayer) {
-                    if (endCallPlayer != null) {
-                        endCallPlayer.release();
-                        endCallPlayer = null;
+        if (endCallPlayer == null) {
+            endCallPlayer = new MediaPlayer();
+            endCallPlayer.setOnPreparedListener(mediaPlayer -> endCallPlayer.start());
+            endCallPlayer.setLooping(false);
+            endCallPlayer.setAudioStreamType(AudioManager.STREAM_VOICE_CALL);
+            try {
+                endCallPlayer.setDataSource(mContext, endCallPlayerUri);
+                endCallPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        if (endCallPlayer != null) {
+                            endCallPlayer.release();
+                            endCallPlayer = null;
+                        }
                     }
+                });
+                endCallPlayer.prepareAsync();
+            } catch (Exception e) {
+                if (endCallPlayer != null) {
+                    endCallPlayer.release();
+                    endCallPlayer = null;
                 }
-            });
-            endCallPlayer.prepareAsync();
-        } catch (Exception e) {
-            if (endCallPlayer != null) {
-                endCallPlayer.release();
-                endCallPlayer = null;
             }
         }
     }
@@ -92,21 +96,23 @@ public class RingtoneUtils {
         boolean needVibrate = am.getRingerMode() != AudioManager.RINGER_MODE_SILENT;
 
         if (needRing) {
-            incomingRingtone = new MediaPlayer();
-            incomingRingtone.setOnPreparedListener(mediaPlayer -> incomingRingtone.start());
-            incomingRingtone.setLooping(true);
-            if (isHeadsetPlugged) {
-                incomingRingtone.setAudioStreamType(AudioManager.STREAM_VOICE_CALL);
-            } else {
-                incomingRingtone.setAudioStreamType(AudioManager.STREAM_RING);
-            }
-            try {
-                incomingRingtone.setDataSource(mContext, incomingRingtoneUri);
-                incomingRingtone.prepareAsync();
-            } catch (Exception e) {
-                if (incomingRingtone != null) {
-                    incomingRingtone.release();
-                    incomingRingtone = null;
+            if (incomingRingtone == null) {
+                incomingRingtone = new MediaPlayer();
+                incomingRingtone.setOnPreparedListener(mediaPlayer -> incomingRingtone.start());
+                incomingRingtone.setLooping(true);
+                if (isHeadsetPlugged) {
+                    incomingRingtone.setAudioStreamType(AudioManager.STREAM_VOICE_CALL);
+                } else {
+                    incomingRingtone.setAudioStreamType(AudioManager.STREAM_RING);
+                }
+                try {
+                    incomingRingtone.setDataSource(mContext, incomingRingtoneUri);
+                    incomingRingtone.prepareAsync();
+                } catch (Exception e) {
+                    if (incomingRingtone != null) {
+                        incomingRingtone.release();
+                        incomingRingtone = null;
+                    }
                 }
             }
         }

@@ -354,10 +354,10 @@ public class IncomingCallActivity extends Activity implements View.OnClickListen
         imNetwork.setVisibility(View.VISIBLE);
 
         if (incomingCall != null) {
-            incomingCall.answer();
+            incomingCall.answer(null);
         }
         if (incomingCall2 != null) {
-            incomingCall2.answer();
+            incomingCall2.answer(null);
         }
     }
 
@@ -390,12 +390,12 @@ public class IncomingCallActivity extends Activity implements View.OnClickListen
         unregisterEvents();
 
         if (incomingCall != null && isHangup) {
-            incomingCall.hangup();
+            incomingCall.hangup(null);
         }
         incomingCall = null;
 
         if (incomingCall2 != null && isHangup) {
-            incomingCall2.hangup();
+            incomingCall2.hangup(null);
         }
         incomingCall2 = null;
 
@@ -487,6 +487,106 @@ public class IncomingCallActivity extends Activity implements View.OnClickListen
             }
         };
         statsTimer.schedule(statsTimerTask, 0, 3000);
+
+        if (isVideoCall) {
+            RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            p.setMargins(Utils.dpToPx(IncomingCallActivity.this, 20), Utils.dpToPx(IncomingCallActivity.this, 20), Utils.dpToPx(IncomingCallActivity.this, 20), Utils.dpToPx(IncomingCallActivity.this, 20));
+            vStatus.setLayoutParams(p);
+            vStatus.setGravity(Gravity.LEFT);
+
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) vLocal.getLayoutParams();
+            params.width = Utils.dpToPx(IncomingCallActivity.this, 100);
+            params.height = Utils.dpToPx(IncomingCallActivity.this, 150);
+            params.setMargins(0, Utils.dpToPx(IncomingCallActivity.this, 20), Utils.dpToPx(IncomingCallActivity.this, 20), 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                params.removeRule(RelativeLayout.CENTER_IN_PARENT);
+            }
+            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            vLocal.setLayoutParams(params);
+            vLocal.removeAllViews();
+            incomingCall.getLocalView().setMirror(true);
+            vLocal.addView(incomingCall.getLocalView());
+            incomingCall.renderLocalView(true);
+
+
+            rootView.setOnClickListener(view -> {
+                if (vControl.getVisibility() == View.VISIBLE) {
+                    vControl.setVisibility(View.INVISIBLE);
+                } else {
+                    vControl.setVisibility(View.VISIBLE);
+                }
+            });
+            try {
+                vRemote.removeAllViews();
+                vRemote.addView(incomingCall.getRemoteView());
+                incomingCall.renderRemoteView(false, StringeeVideo.ScalingType.SCALE_ASPECT_FIT);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    private void callStarted2() {
+        if (startTime > 0) {
+            return;
+        }
+        tvState.setText(R.string.stringee_call_started);
+        startTime = System.currentTimeMillis();
+
+        timer = new Timer();
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(() -> tvState.setText(DateTimeUtils.getCallTime(System.currentTimeMillis(), startTime)));
+            }
+        };
+        timer.schedule(timerTask, 0, 1000);
+
+        statsTimer = new Timer();
+        statsTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                incomingCall2.getStats(statsReport -> runOnUiThread(() -> checkCallStats2(statsReport)));
+            }
+        };
+        statsTimer.schedule(statsTimerTask, 0, 3000);
+
+        if (isVideoCall) {
+            RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            p.setMargins(Utils.dpToPx(IncomingCallActivity.this, 20), Utils.dpToPx(IncomingCallActivity.this, 20), Utils.dpToPx(IncomingCallActivity.this, 20), Utils.dpToPx(IncomingCallActivity.this, 20));
+            vStatus.setLayoutParams(p);
+            vStatus.setGravity(Gravity.LEFT);
+
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) vLocal.getLayoutParams();
+            params.width = Utils.dpToPx(IncomingCallActivity.this, 100);
+            params.height = Utils.dpToPx(IncomingCallActivity.this, 150);
+            params.setMargins(0, Utils.dpToPx(IncomingCallActivity.this, 20), Utils.dpToPx(IncomingCallActivity.this, 20), 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                params.removeRule(RelativeLayout.CENTER_IN_PARENT);
+            }
+            params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            vLocal.setLayoutParams(params);
+            vLocal.removeAllViews();
+            incomingCall2.getLocalView().setMirror(true);
+            vLocal.addView(incomingCall2.getLocalView());
+            incomingCall2.renderLocalView(true);
+
+
+            rootView.setOnClickListener(view -> {
+                if (vControl.getVisibility() == View.VISIBLE) {
+                    vControl.setVisibility(View.INVISIBLE);
+                } else {
+                    vControl.setVisibility(View.VISIBLE);
+                }
+            });
+            try {
+                vRemote.removeAllViews();
+                vRemote.addView(incomingCall2.getRemoteView());
+                incomingCall2.renderRemoteView(false, StringeeVideo.ScalingType.SCALE_ASPECT_FIT);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     private void registerEvents() {
@@ -547,66 +647,7 @@ public class IncomingCallActivity extends Activity implements View.OnClickListen
                     short mediaState = intent.getShortExtra(Constant.PARAM_CALL_MEDIA_STATE, (short) 0);
                     if (mediaState == StringeeCall2.MediaState.CONNECTED.getValue()) {
                         if (mState2 == StringeeCall2.SignalingState.ANSWERED.getValue()) {
-                            if (startTime > 0) {
-                                return;
-                            }
-                            tvState.setText(R.string.stringee_call_started);
-                            startTime = System.currentTimeMillis();
-
-                            timer = new Timer();
-                            timerTask = new TimerTask() {
-                                @Override
-                                public void run() {
-                                    runOnUiThread(() -> tvState.setText(DateTimeUtils.getCallTime(System.currentTimeMillis(), startTime)));
-                                }
-                            };
-                            timer.schedule(timerTask, 0, 1000);
-
-                            statsTimer = new Timer();
-                            statsTimerTask = new TimerTask() {
-                                @Override
-                                public void run() {
-                                    incomingCall2.getStats(statsReport -> runOnUiThread(() -> checkCallStats2(statsReport)));
-                                }
-                            };
-                            statsTimer.schedule(statsTimerTask, 0, 3000);
-
-                            if (isVideoCall) {
-                                RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                                p.setMargins(Utils.dpToPx(IncomingCallActivity.this, 20), Utils.dpToPx(IncomingCallActivity.this, 20), Utils.dpToPx(IncomingCallActivity.this, 20), Utils.dpToPx(IncomingCallActivity.this, 20));
-                                vStatus.setLayoutParams(p);
-                                vStatus.setGravity(Gravity.LEFT);
-
-                                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) vLocal.getLayoutParams();
-                                params.width = Utils.dpToPx(IncomingCallActivity.this, 100);
-                                params.height = Utils.dpToPx(IncomingCallActivity.this, 150);
-                                params.setMargins(0, Utils.dpToPx(IncomingCallActivity.this, 20), Utils.dpToPx(IncomingCallActivity.this, 20), 0);
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                                    params.removeRule(RelativeLayout.CENTER_IN_PARENT);
-                                }
-                                params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                                vLocal.setLayoutParams(params);
-                                vLocal.removeAllViews();
-                                incomingCall2.getLocalView().setMirror(true);
-                                vLocal.addView(incomingCall2.getLocalView());
-                                incomingCall2.renderLocalView(true);
-
-
-                                rootView.setOnClickListener(view -> {
-                                    if (vControl.getVisibility() == View.VISIBLE) {
-                                        vControl.setVisibility(View.INVISIBLE);
-                                    } else {
-                                        vControl.setVisibility(View.VISIBLE);
-                                    }
-                                });
-                                try {
-                                    vRemote.removeAllViews();
-                                    vRemote.addView(incomingCall2.getRemoteView());
-                                    incomingCall2.renderRemoteView(false, StringeeVideo.ScalingType.SCALE_ASPECT_FIT);
-                                } catch (Exception ex) {
-                                    ex.printStackTrace();
-                                }
-                            }
+                            callStarted2();
                         }
                     }
                 }

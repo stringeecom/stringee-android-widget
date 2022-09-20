@@ -18,11 +18,11 @@ public class RejectCallService extends IntentService {
         String callId = intent.getStringExtra(Constant.PARAM_CALL_ID);
         StringeeCall stringeeCall = StringeeWidget.callMap.get(callId);
         if (stringeeCall != null) {
-            stringeeCall.reject();
+            stringeeCall.reject(null);
         }
         StringeeCall2 stringeeCall2 = StringeeWidget.callMap2.get(callId);
         if (stringeeCall2 != null) {
-            stringeeCall2.reject();
+            stringeeCall2.reject(null);
         }
 
         RingtoneUtils.getInstance(getApplicationContext()).stopRinging();

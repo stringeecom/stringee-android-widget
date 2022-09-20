@@ -69,7 +69,7 @@ public class StringeeWidget {
                         @Override
                         public void run() {
                             if (stringeeWidget.isInCall) {
-                                stringeeCall.reject();
+                                stringeeCall.reject(null);
                                 return;
                             }
                             String callId = stringeeCall.getCallId();
@@ -117,7 +117,7 @@ public class StringeeWidget {
                                                 Intent intent = new Intent();
                                                 intent.putExtra(Constant.PARAM_CALL_ID, stringeeCall.getCallId());
                                                 EventManager.getInstance().sendEvent(Notify.CALL_HANDLED_ON_OTHER_DEVICE.getValue(), intent);
-                                                stringeeCall.hangup();
+                                                stringeeCall.hangup(null);
                                                 break;
                                         }
                                     });
@@ -178,7 +178,7 @@ public class StringeeWidget {
                         @Override
                         public void run() {
                             if (stringeeWidget.isInCall) {
-                                stringeeCall2.reject();
+                                stringeeCall2.reject(null);
                                 return;
                             }
                             String callId = stringeeCall2.getCallId();
@@ -226,7 +226,7 @@ public class StringeeWidget {
                                                 Intent intent = new Intent();
                                                 intent.putExtra(Constant.PARAM_CALL_ID, stringeeCall2.getCallId());
                                                 EventManager.getInstance().sendEvent(Notify.CALL_HANDLED_ON_OTHER_DEVICE.getValue(), intent);
-                                                stringeeCall2.hangup();
+                                                stringeeCall2.hangup(null);
                                                 break;
                                         }
                                     });
@@ -413,7 +413,9 @@ public class StringeeWidget {
         }
         isInCall = true;
         requestId++;
-        statusListenerMap.put(requestId, listener);
+        if (listener != null) {
+            statusListenerMap.put(requestId, listener);
+        }
         Intent intent = new Intent(mContext, OutgoingCallActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(Constant.PARAM_CALL_CONFIG, callConfig);
@@ -443,7 +445,9 @@ public class StringeeWidget {
             client.connect(accessToken);
         }
         requestId++;
-        statusListenerMap.put(requestId, listener);
+        if (listener != null) {
+            statusListenerMap.put(requestId, listener);
+        }
         Intent intent = new Intent(mContext, OutgoingCallActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(Constant.PARAM_CALL_CONFIG, callConfig);

@@ -7,11 +7,11 @@
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.ViettelSDK">
+        android:supportsRtl="true">
         <activity
             android:name="com.stringee.stringeesample.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.StringeeWidget">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,15 +30,6 @@
 
         <service android:name="com.stringee.widget.RejectCallService" />
 
-        <service
-            android:name=".MyFirebaseMessagingService"
-            android:enabled="true"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </service>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -51,5 +42,4 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-
 </manifest>

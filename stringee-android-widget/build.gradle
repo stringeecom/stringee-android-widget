@@ -1,19 +1,27 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdk 31
+    lintOptions {
+        abortOnError false
+    }
 
     defaultConfig {
-        minSdk 16
-        targetSdk 31
+        targetSdkVersion 32
+        minSdkVersion 16
     }
 
-    buildTypes {
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+    compileSdkVersion 32
+    buildToolsVersion '30.0.3'
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/DEPENDENCIES'
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -21,16 +29,14 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.firebase:firebase-messaging:18.0.0'
-
     // Stringee SDK
     api fileTree(dir: "libs", include: ["*.jar", "*.aar"])
+    implementation 'androidx.appcompat:appcompat:1.4.2'
 }
 
 ext {
     PUBLISH_GROUP_ID = 'com.stringee.sdk.android'
-    PUBLISH_VERSION = '1.0.0'
+    PUBLISH_VERSION = '1.0.6'
     PUBLISH_ARTIFACT_ID = 'stringee-android-widget'
 }
 
